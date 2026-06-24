@@ -7,9 +7,24 @@
 
 O **Plate Vision API** é um ecossistema completo de backend desenvolvido para a disciplina de Engenharia de Computação da **SATC**. O sistema resolve o problema de automação de portarias, estacionamentos e centros logísticos ao integrar inteligência artificial para o processamento de imagens em tempo real.
 
+## 👥 Colaboradores
+
+O desenvolvimento do **Plate Vision API** foi realizado como projeto acadêmico pelos alunos de Engenharia de Computação da **SATC**:
+
+* **Wesley Schardosim Machado**
+    * **GitHub:** [@Wesley-SM](https://github.com/Wesley-SM)
+* **Igor Rocha Speck**
+    
+    * **GitHub:** [Link do GitHub do Igor](https://github.com/usuario-do-igor)
+
+---
+
+> 💡 *Trabalho desenvolvido com o objetivo de unir Visão Computacional por Inteligência Artificial ao controle de acesso automatizado de veículos em ambientes acadêmicos e empresariais.*
+
 A aplicação recebe uma imagem capturada por qualquer dispositivo móvel, utiliza o modelo **Google Gemini 2.5 Flash** para extrair os caracteres da placa automobilística, higieniza o texto por meio de algoritmos de tratamento de OCR e consulta instantaneamente a base de dados relacional. Com base nas regras de negócio pré-estabelecidas, o sistema determina se o veículo possui acesso regularizado ou bloqueado, registrando o evento em uma tabela auditável de acessos históricos com paginação e suporte a exportações em formato de planilha.
 
 ---
+
 
 ## 📌 Sumário
 1. [🏗️ Estrutura Arquitetural de Pastas e Arquivos](#️-estrutura-arquitetural-de-pastas-e-arquivos)
@@ -80,7 +95,7 @@ plate_vision_api/
 
 ---
 
-## 📋 Requisitos do Edital Atendidos
+## 🎯 Mapeamento de Requisitos do Trabalho Acadêmico
 
 O projeto foi rigorosamente estruturado de forma a cumprir 100% das exigências de avaliação técnica da disciplina:
 
