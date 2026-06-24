@@ -37,6 +37,7 @@ A aplicação recebe uma imagem capturada por qualquer dispositivo móvel, utili
    * [Histórico e Auditoria de Acesso](#-histórico-e-auditoria-de-acesso)
 5. [🔍 Como Realizar Pesquisas Avançadas (Filtros)](#-como-realizar-pesquisas-avançadas-filtros)
 6. [🛑 Guia de Teste de Erros HTTP (Respostas Semânticas)](#-guia-de-teste-de-erros-http-respostas-semânticas)
+7. [📱 Funcionalidades da Interface Web/Mobile (`index.html`)](#-Funcionalidades-da-Interface-Web/Mobile-(`index.html`))
 
 
 ---
@@ -129,8 +130,8 @@ Execute o projeto através da sua IDE de preferência (IntelliJ IDEA, VS Code) o
    `mvn spring-boot:run`
 
 
+##🔑 Como Configurar a API Key após Clonar o Repositório
 
-## Configurar a Chave da API do Gemini (API Key)
 O projeto utiliza uma variável de ambiente para não expor chaves de segurança no código.
 `PEGAR UMA KEY GRATIS :`  https://aistudio.google.com
 
@@ -183,7 +184,7 @@ O sistema baseia-se em três entidades principais fortemente ligadas:
 
 A API trabalha estritamente com os padrões RESTful, utilizando os métodos HTTP corretos para cada operação e retornando objetos estruturados (JSON) ou arquivos físicos quando necessário.
 
-### 1. Proprietários (`/proprietarios`)
+## 1. Proprietários (`/proprietarios`)
 Gerencia o cadastro das pessoas vinculadas aos veículos do sistema.
 - `GET /proprietarios` -> Retorna a lista paginada e ordenada de todos os proprietários cadastrados.
 - `GET /proprietarios/{id}` -> Busca os detalhes de um proprietário específico pelo ID. Retorna `404` se não existir.
