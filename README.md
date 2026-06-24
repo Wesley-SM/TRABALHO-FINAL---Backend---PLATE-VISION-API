@@ -297,5 +297,12 @@ A aplicação localizada na pasta `src/main/resources/static/`, oferecendo os se
 2. **Processamento Assíncrono com Feedback Visual:** Exibe um carregador animado enquanto a IA processa a placa. O resultado exibe um card dinâmico: **Verde (Liberado)** ou **Vermelho (Bloqueado)** com a justificativa das regras de negócio.
 3. **Sincronização Simultânea em Tempo Real (Polling):** A tabela de últimos acessos faz varreduras automáticas a cada 3 segundos no banco de dados. Qualquer veículo processado por um computador atualizará instantaneamente o ecrã do telemóvel do operador (e vice-versa), sem necessidade de recarregar a página.
 4. **Respeito Dinâmico ao IP do Servidor:** O frontend auto-configura as rotas através de `window.location.origin`, permitindo que o computador e múltiplos smartphones na mesma rede Wi-Fi operem o sistema sem erros de conexão ou travamento em `localhost`.
+5. 
+
+https://github.com/user-attachments/assets/85d85a63-a807-415c-95ee-a2fb48356aee
+
+
+
+
 
 
