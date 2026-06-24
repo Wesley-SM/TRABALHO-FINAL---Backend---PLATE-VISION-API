@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plate Vision - Painel de Controle</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col items-center p-4 antialiased">
+
+<header class="w-full max-w-4xl text-center my-6">
+    <h1 class="text-3xl font-black tracking-wider text-emerald-400">
+        <i class="fa-solid fa-camera-retro mr-2"></i>PLATE VISION API
+    </h1>
+    <p class="text-gray-400 text-sm mt-1">Monitoramento Inteligente e Controle de Acessos SATC</p>
+</header>
+
+<main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <section class="bg-gray-800 p-6 rounded-2xl border border-gray-700 shadow-xl flex flex-col justify-between">
+        <div>
+            <h2 class="text-xl font-bold mb-4 text-gray-200 border-b border-gray-700 pb-2">
+                <i class="fa-solid fa-expand mr-2 text-emerald-400"></i>Escanear Veículo
+            </h2>
+
+            <form id="uploadForm" class="space-y-4">
+
+                <div id="previewContainer" class="w-full h-44 overflow-hidden rounded-xl border-2 border-gray-700 bg-gray-950 flex flex-col justify-center items-center relative">
+                    <div id="placeholderPreview" class="flex flex-col items-center justify-center text-center p-4 text-gray-500">
+                        <i class="fa-solid fa-image text-3xl mb-2"></i>
+                        <p class="text-xs font-medium">Nenhum veículo selecionado</p>
+                    </div>
+                    <img id="imagePreview" src="" alt="Preview" class="hidden max-h-44 object-contain w-full h-full">
+                </div>
+
+                <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" />
+                <input type="file" id="galeriaInput" accept="image/*" class="hidden" />
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" id="btnCamera" class="bg-gray-700 hover:bg-gray-650 border border-gray-600 text-gray-200 font-bold py-3 px-2 text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-md">
+                        <i class="fa-solid fa-camera text-emerald-400 text-sm"></i> Tirar Foto
+                    </button>
+                    <button type="button" id="btnGaleria" class="bg-gray-700 hover:bg-gray-650 border border-gray-600 text-gray-200 font-bold py-3 px-2 text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-md">
+                        <i class="fa-solid fa-images text-blue-400 text-sm"></i> Usar Galeria
+                    </button>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-gray-900 font-black py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/20 mt-2">
+                    <i class="fa-solid fa-brain"></i> Processar com Gemini AI
+                </button>
+            </form>
+        </div>
+
+        <div id="loader" class="hidden text-center py-4">
+            <i class="fa-solid fa-circle-notch animate-spin text-3xl text-emerald-400"></i>
+            <p class="text-sm text-gray-400 mt-2">A inteligência artificial está lendo a placa...</p>
+        </div>
+
+        <div id="resultCard" class="hidden mt-6 p-4 rounded-xl border flex flex-col gap-2">
+            <div class="flex justify-between items-center">
+                <span id="resultBadge" class="text-xs font-black px-2.5 py-1 rounded-full"></span>
+                <span id="resultTime" class="text-xs text-gray-400"></span>
+            </div>
+
+            <div class="text-2xl font-mono font-black text-center tracking-widest my-1 bg-gray-900 p-2 rounded-lg border border-gray-700" id="resultPlaca">
+                ---
+            </div>
+
+            <div id="resultDetalhes" class="hidden bg-gray-950/60 p-3 rounded-lg border border-gray-700/40 space-y-2 my-1 text-xs">
+                <div class="flex justify-between border-b border-gray-800/60 pb-1.5">
+                    <span class="text-gray-400"><i class="fa-solid fa-user mr-1 text-emerald-400"></i> Proprietário:</span>
+                    <span id="resultProprietario" class="font-bold text-gray-200">---</span>
+                </div>
+                <div class="flex justify-between border-b border-gray-800/60 pb-1.5">
+                    <span class="text-gray-400"><i class="fa-solid fa-car mr-1 text-blue-400"></i> Modelo:</span>
+                    <span id="resultModelo" class="font-semibold text-gray-200">---</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400"><i class="fa-solid fa-palette mr-1 text-purple-400"></i> Cor:</span>
+                    <span id="resultCor" class="font-semibold text-gray-200">---</span>
+                </div>
+            </div>
+
+            <p id="resultMsg" class="text-sm text-gray-300 text-center mt-1"></p>
+        </div>
+    </section>
+
+    <section class="bg-gray-800 p-6 rounded-2xl border border-gray-700 shadow-xl flex flex-col justify-between">
+        <div>
+            <div class="flex justify-between items-center mb-4 border-b border-gray-700 pb-2">
+                <h2 class="text-xl font-bold text-gray-200">
+                    <i class="fa-solid fa-clock-rotate-left mr-2 text-blue-400"></i>Últimos Acessos
+                </h2>
+                <span class="text-[10px] bg-gray-900 border border-gray-700 text-gray-500 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <i class="fa-solid fa-sync fa-spin text-blue-500"></i> Sincronizado
+                    </span>
+            </div>
+
+            <div class="overflow-x-auto max-h-72 overflow-y-auto rounded-lg border border-gray-700 bg-gray-900">
+                <table class="w-full text-sm text-left text-gray-400">
+                    <thead class="text-xs uppercase bg-gray-800 text-gray-300 font-bold sticky top-0">
+                    <tr>
+                        <th class="px-4 py-2">Placa</th>
+                        <th class="px-4 py-2">Horário</th>
+                        <th class="px-4 py-2">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody id="historicoTableBody">
+                    <tr>
+                        <td colspan="3" class="text-center py-4 text-gray-500">Carregando registros...</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-gray-700 flex gap-2">
+            <a href="/acessos/export" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-xl text-center text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-blue-900/20">
+                <i class="fa-solid fa-file-csv"></i> Exportar Histórico (CSV)
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer class="mt-12 text-center text-xs text-gray-600">
+    Engenharia de Computação &copy; 2026 — SATC
+</footer>
+
+<script>
+    const API_BASE = window.location.origin;
+    const cameraInput = document.getElementById('cameraInput');
+    const galeriaInput = document.getElementById('galeriaInput');
+    const btnCamera = document.getElementById('btnCamera');
+    const btnGaleria = document.getElementById('btnGaleria');
+
+    const imagePreview = document.getElementById('imagePreview');
+    const placeholderPreview = document.getElementById('placeholderPreview');
+
+    btnCamera.addEventListener('click', () => cameraInput.click());
+    btnGaleria.addEventListener('click', () => galeriaInput.click());
+
+    function processarPreview(file) {
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.classList.remove('hidden');
+                placeholderPreview.classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    cameraInput.addEventListener('change', function(e) {
+        if (e.target.files.length) {
+            galeriaInput.value = "";
+            processarPreview(e.target.files[0]);
+        }
+    });
+
+    galeriaInput.addEventListener('change', function(e) {
+        if (e.target.files.length) {
+            cameraInput.value = "";
+            processarPreview(e.target.files[0]);
+        }
+    });
+
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const arquivoAtivo = cameraInput.files[0] || galeriaInput.files[0];
+
+        if (!arquivoAtivo) {
+            return alert("Por favor, tire uma foto ou selecione um arquivo de imagem antes de processar!");
+        }
+
+        const formData = new FormData();
+        formData.append("foto", arquivoAtivo);
+
+        const loader = document.getElementById('loader');
+        const resultCard = document.getElementById('resultCard');
+
+        loader.classList.remove('hidden');
+        resultCard.classList.add('hidden');
+
+        try {
+            const response = await fetch(`${API_BASE}/placas/upload`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            loader.classList.add('hidden');
+            resultCard.classList.remove('hidden');
+
+            const badge = document.getElementById('resultBadge');
+            const placaDiv = document.getElementById('resultPlaca');
+            const msgP = document.getElementById('resultMsg');
+            const timeSpan = document.getElementById('resultTime');
+
+            const detalhesDiv = document.getElementById('resultDetalhes');
+            const proprietarioSpan = document.getElementById('resultProprietario');
+            const modeloSpan = document.getElementById('resultModelo');
+            const corSpan = document.getElementById('resultCor');
+
+            placaDiv.innerText = data.placa_processada_sistema || data.placa_detectada || data.placa || "NÃO LIDA";
+            timeSpan.innerText = new Date().toLocaleTimeString();
+
+            const proprietarioNome = data.nomeProprietario || data.nome_proprietario || data.proprietario;
+            const veiculoModelo = data.modelo;
+            const veiculoCor = data.cor;
+
+            if (proprietarioNome || veiculoModelo || veiculoCor) {
+                detalhesDiv.classList.remove('hidden');
+                proprietarioSpan.innerText = proprietarioNome || "Não Cadastrado";
+                modeloSpan.innerText = veiculoModelo || "---";
+                corSpan.innerText = veiculoCor || "---";
+            } else {
+                detalhesDiv.classList.add('hidden');
+            }
+
+            if (response.ok && data.status_acesso === "LIBERADO") {
+                resultCard.className = "mt-6 p-4 rounded-xl border border-emerald-500 bg-emerald-950/30 text-emerald-400";
+                badge.className = "text-xs font-black px-2.5 py-1 rounded-full bg-emerald-500 text-gray-900";
+                badge.innerText = "LIBERADO";
+                msgP.innerText = data.justificativa || data.mensagem;
+            } else {
+                resultCard.className = "mt-6 p-4 rounded-xl border border-rose-500 bg-rose-950/30 text-rose-400";
+                badge.className = "text-xs font-black px-2.5 py-1 rounded-full bg-rose-500 text-gray-900";
+                badge.innerText = "BLOQUEADO";
+                msgP.innerText = data.justificativa || data.acao || "Acesso negado.";
+            }
+
+            cameraInput.value = "";
+            galeriaInput.value = "";
+            carregarHistorico();
+
+        } catch (error) {
+            loader.classList.add('hidden');
+            alert("Erro ao processar imagem no servidor backend.");
+            console.error(error);
+        }
+    });
+
+    async function carregarHistorico() {
+        const tableBody = document.getElementById('historicoTableBody');
+
+        try {
+            const response = await fetch(`${API_BASE}/acessos?page=0&size=10&sort=id,desc`);
+            if (!response.ok) throw new Error("Falha ao buscar logs");
+
+            const data = await response.json();
+            const logs = data.content || [];
+
+            if (logs.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="3" class="text-center py-4 text-gray-500">Nenhum registro encontrado.</td></tr>`;
+                return;
+            }
+
+            tableBody.innerHTML = logs.map(log => {
+                const statusAtual = log.statusAcesso || log.status || "NEGADO";
+                const isLiberado = statusAtual === "LIBERADO" || statusAtual === "REGULAR";
+
+                const badgeClass = isLiberado
+                    ? "text-emerald-400 font-bold bg-emerald-950/50 border border-emerald-800 px-2 py-0.5 rounded text-xs"
+                    : "text-rose-400 font-bold bg-rose-950/50 border border-rose-800 px-2 py-0.5 rounded text-xs";
+
+                const campoData = log.dataHoraAcesso || log.horario;
+                const dataFormatada = campoData ? new Date(campoData).toLocaleString('pt-BR') : '---';
+                const placaExibicao = log.placaDetectada || log.placa || "---";
+
+                return `
+                    <tr class="border-b border-gray-800 hover:bg-gray-850 transition">
+                        <td class="px-4 py-3 font-mono font-bold text-gray-200">${placaExibicao}</td>
+                        <td class="px-4 py-3 text-xs text-gray-400">${dataFormatada}</td>
+                        <td class="px-4 py-3">
+                            <span class="${badgeClass}">${statusAtual}</span>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+        } catch (error) {
+            console.error("Erro na busca automática:", error);
+        }
+    }
+
+    window.onload = function() {
+        carregarHistorico();
+        setInterval(carregarHistorico, 3000);
+    };
+</script>
+</body>
+</html>

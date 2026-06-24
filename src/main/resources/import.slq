@@ -1,0 +1,102 @@
+
+SELECT * FROM tb_veiculo;
+
+
+
+SELECT * FROM tb_proprietario;
+
+SELECT * FROM tb_registro_acesso;
+
+SHOW TABLES;
+
+--
+-- ====================================================================
+-- 1. POPULAÇÃO DA TABELA DE PROPRIETÁRIOS (tb_proprietario) - 15 PESSOAS
+-- ====================================================================
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('111.111.111-11', 'Carlos Silva', '(48) 99999-1111');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('222.222.222-22', 'Ana Souza', '(48) 99999-2222');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('333.333.333-33', 'Marcos Oliveira', '(49) 98888-3333');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('444.444.444-44', 'Julia Costa', '(51) 97777-4444');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('555.555.555-55', 'Roberto Santos', '(48) 99111-5555');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('666.666.666-66', 'Mariana Lima', '(48) 99222-6666');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('777.777.777-77', 'Fernando Alves', '(48) 99333-7777');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('888.888.888-88', 'Beatriz Ribeiro', '(47) 99444-8888');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('999.999.999-99', 'Lucas Almeida', '(48) 99555-9999');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('101.101.101-01', 'Amanda Rodrigues', '(51) 99666-1010');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('202.202.202-02', 'Ricardo Carvalho', '(48) 99777-2020');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('303.303.303-03', 'Camila Martins', '(49) 99888-3030');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('404.404.404-04', 'Bruno Rocha', '(48) 99999-4040');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('505.505.505-05', 'Larissa Dias', '(48) 99111-5050');
+INSERT INTO tb_proprietario (cpf, nome, telefone) VALUES ('606.606.606-06', 'Tiago Gomes', '(47) 99222-6060');
+
+-- ====================================================================
+-- 2. POPULAÇÃO DA TABELA DE VEÍCULOS (tb_veiculo) - DISTRIBUIÇÃO (1 OU 2 CARROS)
+-- ====================================================================
+
+-- Proprietário 1: Carlos Silva (1 veículo - IRREGULAR)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Cinza', 'Honda Civic LXS', 'BEE4R22', 'BLOQUEADO', 1);
+
+-- Proprietário 2: Ana Souza (2 veículos)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Preto', 'Ford Focus Titanium', 'FTR5I05', 'REGULAR', 2);
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Prata', 'Toyota Corolla', 'ABC1D23', 'REGULAR', 2);
+
+-- Proprietário 3: Marcos Oliveira (2 veículos)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Preto/Amarelo', 'BMW F800 GS', 'CFP2A20', 'REGULAR', 3);
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Azul', 'Hyundai HB20', 'JKL9M88', 'REGULAR', 3);
+
+-- Proprietário 4: Julia Costa (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Branco', 'Jeep Compass', 'XYZ9W87', 'REGULAR', 4);
+
+-- Proprietário 5: Roberto Santos (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Vermelho', 'Chevrolet Onix', 'QWE2R34', 'REGULAR', 5);
+
+-- Proprietário 6: Mariana Lima (2 veículos)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Branco', 'Volkswagen Gol', 'MNO4V56', 'REGULAR', 6);
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Cinza', 'Fiat Uno', 'KKK2J11', 'REGULAR', 6);
+
+-- Proprietário 7: Fernando Alves (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Vermelho', 'Honda Civic SI', 'LKM5N43', 'REGULAR', 7);
+
+-- Proprietário 8: Beatriz Ribeiro (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Prata', 'Ford Ka', 'OIP6U78', 'REGULAR', 8);
+
+-- Proprietário 9: Lucas Almeida (2 veículos)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Branco', 'Chevrolet Cruze', 'HGF3D21', 'REGULAR', 9);
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Preto', 'Renault Sandero', 'ZXC7B89', 'REGULAR', 9);
+
+-- Proprietário 10: Amanda Rodrigues (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Azul/Branco', 'BMW G310 GS', 'YTR8E90', 'REGULAR', 10);
+
+-- Proprietário 11: Ricardo Carvalho (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Azul', 'Scania R450', 'POU3Y21', 'REGULAR', 11);
+
+-- Proprietário 12: Camila Martins (2 veículos)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Preto', 'Hyundai Creta', 'VBN4M56', 'REGULAR', 12);
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Branco', 'Toyota Hilux', 'GHJ8K99', 'REGULAR', 12);
+
+-- Proprietário 13: Bruno Rocha (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Prata', 'Volkswagen Virtus', 'PLM0O99', 'REGULAR', 13);
+
+-- Proprietário 14: Larissa Dias (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Verde', 'Fiat Toro', 'NBV7C65', 'REGULAR', 14);
+
+-- Proprietário 15: Tiago Gomes (1 veículo)
+INSERT INTO tb_veiculo (cor, modelo, placa, status, proprietario_id) VALUES ('Cinza', 'Nissan Kicks', 'ASD4F33', 'REGULAR', 15);
+
+-- ====================================================================
+-- 3. POPULAÇÃO DA TABELA DE HISTÓRICO (tb_registro_acesso) - 5 REGISTROS
+-- ====================================================================
+INSERT INTO tb_registro_acesso (data_hora_acesso, justificativa, placa_detectada, status_acesso)
+VALUES (CURRENT_TIMESTAMP, 'Acesso Negado - Veículo com restrição cadastral/Bloqueado', 'BEE4R22', 'BLOQUEADO');
+
+INSERT INTO tb_registro_acesso (data_hora_acesso, justificativa, placa_detectada, status_acesso)
+VALUES (CURRENT_TIMESTAMP, 'Entrada liberada - Veículo Identificado Regular', 'FTR5I05', 'REGULAR');
+
+INSERT INTO tb_registro_acesso (data_hora_acesso, justificativa, placa_detectada, status_acesso)
+VALUES (CURRENT_TIMESTAMP, 'Entrada liberada - Morador Identificado', 'RHA0A01', 'REGULAR');
+
+INSERT INTO tb_registro_acesso (data_hora_acesso, justificativa, placa_detectada, status_acesso)
+VALUES (CURRENT_TIMESTAMP, 'Entrada liberada - Visitante Autorizado', 'ABC1D23', 'REGULAR');
+
+INSERT INTO tb_registro_acesso (data_hora_acesso, justificativa, placa_detectada, status_acesso)
+VALUES (CURRENT_TIMESTAMP, 'Entrada liberada - Veículo Identificado Regular', 'XYZ9W87', 'REGULAR');
