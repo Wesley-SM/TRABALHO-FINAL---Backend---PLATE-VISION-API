@@ -116,6 +116,7 @@ O projeto foi rigorosamente estruturado de forma a cumprir 100% das exigências 
 | **Carta-Desafio** | Exportação de dados de auditoria em tempo real gerando arquivos físicos no formato CSV. | `RegistroAcessoController.java` |
 
 ---
+
 ## 🚀 Como Executar a Aplicação
 
 ### 1. Pré-requisitos
@@ -130,7 +131,7 @@ Execute o projeto através da sua IDE de preferência (IntelliJ IDEA, VS Code) o
    `mvn spring-boot:run`
 
 
-##🔑 Como Configurar a API Key após Clonar o Repositório
+## 🔑 Como Configurar a API Key após Clonar o Repositório
 
 O projeto utiliza uma variável de ambiente para não expor chaves de segurança no código.
 `PEGAR UMA KEY GRATIS :`  https://aistudio.google.com
