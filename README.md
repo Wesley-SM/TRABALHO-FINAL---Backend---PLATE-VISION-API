@@ -200,7 +200,7 @@ Gerencia o cadastro das pessoas vinculadas aos veículos do sistema.
       "telefone": "(48) 99999-8888"
       }
 
-- A. Criar Pessoa (Proprietário)
+- A. Criar carro (Veiculos)
 JSON (Body):
 - ```
   URL: http://localhost:8080/veiculos
