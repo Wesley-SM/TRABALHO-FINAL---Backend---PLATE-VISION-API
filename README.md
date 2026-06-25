@@ -15,7 +15,7 @@ O desenvolvimento do **Plate Vision API** foi realizado como projeto acadêmico 
     * **GitHub:** [@Wesley-SM](https://github.com/Wesley-SM)
 * **Igor Rocha Speck**
     
-    * **GitHub:** [Link do GitHub do Igor](https://github.com/igrocha)
+    * **GitHub:** [Igrocha](https://github.com/igrocha)
 
 ---
 
